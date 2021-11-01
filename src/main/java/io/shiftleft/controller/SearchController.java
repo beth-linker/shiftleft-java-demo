@@ -22,11 +22,22 @@ public class SearchController {
     java.lang.Object message = new Object();
     try {
       ExpressionParser parser = new SpelExpressionParser();
-      Expression exp = parser.parseExpression(foo);
+      Expression exp = parser.parseExpression(SearchController.escape(foo));
       message = (Object) exp.getValue();
     } catch (Exception ex) {
       System.out.println(ex.getMessage());
     }
     return message.toString();
+  }
+  
+  public static String escape(String s){
+  return s.replace("\\", "\\\\")
+          .replace("\t", "\\t")
+          .replace("\b", "\\b")
+          .replace("\n", "\\n")
+          .replace("\r", "\\r")
+          .replace("\f", "\\f")
+          .replace("\'", "\\'")
+          .replace("\"", "\\\"");
   }
 }
