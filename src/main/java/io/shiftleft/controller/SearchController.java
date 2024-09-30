@@ -23,7 +23,8 @@ public class SearchController {
     try {
       ExpressionParser parser = new SpelExpressionParser();
       Expression exp = parser.parseExpression(foo);
-      message = (Object) exp.getValue();
+      SimpleEvaluationContext context = SimpleEvaluationContext.forReadWriteDataBinding().build();
+      message = (Object) exp.getValue(context);
     } catch (Exception ex) {
       System.out.println(ex.getMessage());
     }
